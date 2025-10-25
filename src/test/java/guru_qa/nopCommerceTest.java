@@ -38,7 +38,7 @@ public class nopCommerceTest {
             $$(".product-item h2 a").first().shouldHave(text(searchTerm));
         }
 
-    @Tag("Smoke")
+    @Tag("Regress")
     @ParameterizedTest(name = "Добавление в избранное: {0}")
     @CsvSource({
             "HTC One Mini Blue",
