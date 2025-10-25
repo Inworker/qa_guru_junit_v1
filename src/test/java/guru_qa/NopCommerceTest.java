@@ -14,7 +14,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 
 @DisplayName("Тесты nopCommerce")
-public class nopCommerceTest {
+public class NopCommerceTest {
 
     @BeforeEach
     void setUp() {
