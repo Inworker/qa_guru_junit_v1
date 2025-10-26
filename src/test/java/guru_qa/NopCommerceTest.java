@@ -5,8 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
-
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -38,14 +38,17 @@ public class NopCommerceTest {
             $$(".product-item h2 a").first().shouldHave(text(searchTerm));
         }
 
-    @Tag("Regress")
+    public enum Mobile {
+        HTC_One_Mini_Blue,
+        Nokia_Lumia_1020,
+        Samsung_Galaxy_S24_256GB
+    }
+
+    @Tag("Test")
     @ParameterizedTest(name = "Добавление в избранное: {0}")
-    @CsvSource({
-            "HTC One Mini Blue",
-            "Nokia Lumia 1020",
-            "Samsung Galaxy S24 256GB"
-    })
-    void addProductsToWishlist(String productName) {
+    @EnumSource(value = Mobile.class)
+    void addProductsToWishlist(Mobile testData) {
+        String productName = testData.name().replace("_", " ");
         $("#small-searchterms").setValue(productName).pressEnter();
         $$(".product-item").findBy(text(productName))
                 .$(".add-to-wishlist-button").click();
